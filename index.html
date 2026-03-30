@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menovia — Accompagner la ménopause</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum: #6B3A5D;
+  --plum-light: #8E5A7E;
+  --rose: #C48BA0;
+  --blush: #F2D9E0;
+  --cream: #FDF6F0;
+  --warm-white: #FFFAF7;
+  --sand: #E8D5C4;
+  --text: #3D2B35;
+  --text-light: #6B5A63;
+  --sage: #A8B5A0;
+  --gold: #C9A96E;
+  --lavender: #D4C5E2;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  background: var(--warm-white);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(253, 246, 240, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(107, 58, 93, 0.08);
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 2px 24px rgba(107, 58, 93, 0.1); }
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--plum);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--plum), var(--rose));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+}
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--rose);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--plum); }
+.nav-links a:hover::after { width: 100%; }
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--plum);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 2rem 4rem;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(196, 139, 160, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(212, 197, 226, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(232, 213, 196, 0.15) 0%, transparent 50%);
+  z-index: 0;
+}
+.hero-decoration {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+  z-index: 0;
+}
+.hero-decoration.d1 {
+  width: 500px; height: 500px;
+  background: var(--plum);
+  top: -200px; right: -100px;
+}
+.hero-decoration.d2 {
+  width: 300px; height: 300px;
+  background: var(--rose);
+  bottom: -80px; left: -60px;
+}
+.hero-decoration.d3 {
+  width: 200px; height: 200px;
+  background: var(--lavender);
+  top: 30%; left: 5%;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  animation: fadeUp 1s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--blush), var(--lavender));
+  color: var(--plum);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--plum);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--rose);
+}
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--plum), var(--plum-light));
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(107, 58, 93, 0.3);
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(107, 58, 93, 0.4);
+}
+.hero-cta svg { transition: transform 0.3s; }
+.hero-cta:hover svg { transform: translateX(4px); }
+
+/* ─── SECTIONS ─── */
+section { padding: 5rem 2rem; }
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3.5rem;
+}
+.section-tag {
+  display: inline-block;
+  background: var(--blush);
+  color: var(--plum);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--plum);
+  margin-bottom: 0.8rem;
+  line-height: 1.2;
+}
+.section-header p {
+  color: var(--text-light);
+  font-size: 1.05rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ─── ABOUT (À PROPOS) ─── */
+.about-quote {
+  position: relative;
+  background: linear-gradient(135deg, var(--cream), rgba(212, 197, 226, 0.15));
+  border-radius: 24px;
+  padding: 3rem 3.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid rgba(196, 139, 160, 0.15);
+}
+.about-quote::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  color: var(--rose);
+  opacity: 0.3;
+  position: absolute;
+  top: -0.2rem;
+  left: 1.5rem;
+  line-height: 1;
+}
+.about-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--plum);
+  line-height: 1.8;
+}
+
+/* ─── CARDS GRID ─── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  text-align: center;
+  border: 1px solid rgba(196, 139, 160, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(107, 58, 93, 0.1);
+}
+.card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  font-size: 1.6rem;
+}
+.card-icon.pink { background: linear-gradient(135deg, var(--blush), rgba(196, 139, 160, 0.3)); }
+.card-icon.lavender { background: linear-gradient(135deg, var(--lavender), rgba(196, 139, 160, 0.2)); }
+.card-icon.sage { background: linear-gradient(135deg, rgba(168, 181, 160, 0.3), rgba(168, 181, 160, 0.15)); }
+.card-icon.sand { background: linear-gradient(135deg, var(--sand), rgba(201, 169, 110, 0.2)); }
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--plum);
+  margin-bottom: 0.5rem;
+}
+.card p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ─── COMPRENDRE ─── */
+#comprendre { background: var(--cream); }
+
+.info-block {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+}
+.info-block h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--plum);
+  margin-bottom: 1rem;
+}
+.info-block p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+/* body impact grid */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.impact-item {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+}
+.impact-item .icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+.impact-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--plum);
+  margin-bottom: 0.4rem;
+}
+.impact-item p {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* symptoms */
+.symptom-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.symptom-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 1.2rem;
+}
+.symptom-chip .dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--blush));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.symptom-chip strong {
+  font-size: 0.9rem;
+  color: var(--plum);
+  display: block;
+  margin-bottom: 2px;
+}
+.symptom-chip span {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* complications */
+.warning-box {
+  background: linear-gradient(135deg, rgba(201, 169, 110, 0.1), rgba(196, 139, 160, 0.08));
+  border-left: 4px solid var(--gold);
+  border-radius: 0 16px 16px 0;
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+}
+.warning-box h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--plum);
+  margin-bottom: 0.6rem;
+}
+.warning-box ul {
+  list-style: none;
+  padding: 0;
+}
+.warning-box li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.92rem;
+}
+.warning-box li::before {
+  content: '⚠';
+  position: absolute;
+  left: 0;
+  font-size: 0.8rem;
+}
+
+/* ─── MIEUX VIVRE ─── */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.tip-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+  transition: transform 0.3s;
+}
+.tip-card:hover { transform: translateY(-3px); }
+.tip-card .emoji {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.tip-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--plum);
+  margin-bottom: 0.5rem;
+}
+.tip-card p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* treatments */
+.treatment-block {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.treatment-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--plum), var(--plum-light));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.treatment-block h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--plum);
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+.treatment-block p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* consult */
+.consult-reasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+.consult-item {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.consult-item .icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blush);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.consult-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--plum);
+  margin-bottom: 0.3rem;
+}
+.consult-item p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* bonus */
+.bonus-box {
+  background: linear-gradient(135deg, var(--plum), var(--plum-light));
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  margin-top: 2.5rem;
+  color: white;
+}
+.bonus-box p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+/* ─── VRAI OU FAUX ─── */
+#vraifaux { background: var(--cream); }
+
+.myth-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+.myth-card:hover { box-shadow: 0 8px 30px rgba(107, 58, 93, 0.08); }
+.myth-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.myth-badge {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  flex-shrink: 0;
+}
+.myth-header h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--plum);
+}
+.myth-reality {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, rgba(168, 181, 160, 0.15), rgba(168, 181, 160, 0.05));
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+.myth-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.myth-reality p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ─── TEMOIGNAGES ─── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.testimony {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(196, 139, 160, 0.08);
+  position: relative;
+}
+.testimony::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--rose);
+  opacity: 0.25;
+  position: absolute;
+  top: 0.5rem;
+  left: 1.2rem;
+  line-height: 1;
+}
+.testimony-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+.testimony-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+}
+.testimony-avatar.a { background: linear-gradient(135deg, var(--plum), var(--rose)); }
+.testimony-avatar.b { background: linear-gradient(135deg, var(--sage), #7a9970); }
+.testimony-avatar.c { background: linear-gradient(135deg, var(--gold), #b8943d); }
+.testimony-avatar.d { background: linear-gradient(135deg, var(--lavender), var(--plum-light)); }
+.testimony-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--plum);
+}
+.testimony-age {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+.testimony p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ─── CONTACT ─── */
+#contact { background: var(--cream); }
+
+.contact-box {
+  background: white;
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid rgba(196, 139, 160, 0.1);
+}
+.contact-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--plum);
+  margin-bottom: 1.5rem;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  background: var(--cream);
+  transition: background 0.3s, transform 0.3s;
+  font-weight: 500;
+}
+.contact-link:hover {
+  background: var(--blush);
+  transform: translateY(-2px);
+}
+.contact-link .icon {
+  font-size: 1.3rem;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--plum);
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+}
+.footer a {
+  color: var(--blush);
+  text-decoration: none;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── MOBILE ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--warm-white);
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(196,139,160,0.1);
+  }
+  .hamburger { display: block; }
+
+  .hero { padding: 7rem 1.5rem 3rem; min-height: auto; }
+  .hero h1 { font-size: 2rem; }
+  section { padding: 3.5rem 1.2rem; }
+  .about-quote { padding: 2rem 1.5rem; }
+  .info-block { padding: 1.5rem; }
+  .treatment-block { flex-direction: column; }
+  .contact-box { padding: 2rem 1.5rem; }
+  .impact-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🌸</div>
+      Menovia
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#comprendre">Comprendre</a></li>
+      <li><a href="#mieuxvivre">Mieux Vivre</a></li>
+      <li><a href="#vraifaux">Vrai ou Faux</a></li>
+      <li><a href="#partager">Partager</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-decoration d1"></div>
+  <div class="hero-decoration d2"></div>
+  <div class="hero-decoration d3"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Créé par de futures sages-femmes</div>
+    <h1>Bienvenue sur <em>Menovia</em></h1>
+    <p>Un espace dédié à accompagner les femmes à travers la ménopause et à promouvoir leur bien-être. Comprendre, vivre et partager cette transition en toute sérénité.</p>
+    <a href="#comprendre" class="hero-cta">
+      Découvrir Menovia
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- A PROPOS -->
+<section id="apropos">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">À propos</div>
+      <h2>Notre mission</h2>
+    </div>
+    <div class="about-quote reveal">
+      <p>La ménopause n'est pas une fin, c'est une transition. Ici nous levons le voile sur les tabous pour vous offrir des clés scientifiques, des conseils pratiques et un espace de partage bienveillant.</p>
+    </div>
+    <div class="cards-grid" style="margin-top: 3rem;">
+      <a href="#comprendre" class="card reveal">
+        <div class="card-icon pink">📖</div>
+        <h3>Comprendre la ménopause</h3>
+        <p>Découvrez ce qui se passe dans votre corps et pourquoi.</p>
+      </a>
+      <a href="#mieuxvivre" class="card reveal">
+        <div class="card-icon lavender">🌿</div>
+        <h3>Mieux vivre la ménopause</h3>
+        <p>Des conseils pratiques pour traverser cette étape sereinement.</p>
+      </a>
+      <a href="#vraifaux" class="card reveal">
+        <div class="card-icon sage">✓</div>
+        <h3>Vrai ou Faux</h3>
+        <p>Démêlez les idées reçues de la réalité scientifique.</p>
+      </a>
+      <a href="#partager" class="card reveal">
+        <div class="card-icon sand">💬</div>
+        <h3>Partager la ménopause</h3>
+        <p>Des témoignages de femmes qui vivent cette transition.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPRENDRE LA MÉNOPAUSE -->
+<section id="comprendre">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Comprendre</div>
+      <h2>Connaître la ménopause</h2>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Qu'est-ce que la ménopause ?</h3>
+      <p>La ménopause correspond à l'arrêt définitif des règles pendant 12 mois consécutifs, liée à une diminution des hormones ovariennes (œstrogènes et progestérone).</p>
+      <p>Elle survient généralement entre <strong>45 et 55 ans</strong>.</p>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Quel est l'impact de la chute des hormones sur mon corps ?</h3>
+      <p>À la ménopause, la chute des hormones agit sur l'ensemble de l'organisme et transforme son fonctionnement.</p>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="icon">🧠</div>
+          <h4>Cerveau</h4>
+          <p>Dérèglement du contrôle de la température, bouffées de chaleur, sueurs nocturnes, impact sur le sommeil et l'humeur.</p>
+        </div>
+        <div class="impact-item">
+          <div class="icon">❤️</div>
+          <h4>Cœur & artères</h4>
+          <p>Perte de la protection hormonale, augmentation du risque d'hypertension et de cholestérol.</p>
+        </div>
+        <div class="impact-item">
+          <div class="icon">🦴</div>
+          <h4>Os</h4>
+          <p>Perte de densité osseuse, risque d'ostéoporose et douleurs articulaires.</p>
+        </div>
+        <div class="impact-item">
+          <div class="icon">✨</div>
+          <h4>Peau & cheveux</h4>
+          <p>Affinement et sécheresse en raison de la baisse de collagène.</p>
+        </div>
+        <div class="impact-item">
+          <div class="icon">🩺</div>
+          <h4>Appareil uro-génital</h4>
+          <p>Sécheresse vaginale et fragilité de la vessie.</p>
+        </div>
+        <div class="impact-item">
+          <div class="icon">⚖️</div>
+          <h4>Métabolisme</h4>
+          <p>Tendance à stocker davantage de graisses au niveau du ventre.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Quels sont les symptômes que je peux ressentir ?</h3>
+      <p>Chaque femme vit sa ménopause différemment. Certaines traverseront cette période sans presque rien ressentir, tandis que d'autres auront des symptômes plus marqués.</p>
+      <div class="symptom-list">
+        <div class="symptom-chip">
+          <div class="dot">🔥</div>
+          <div>
+            <strong>Bouffées de chaleur</strong>
+            <span>Sensations de chaleur soudaines au visage et au buste.</span>
+          </div>
+        </div>
+        <div class="symptom-chip">
+          <div class="dot">😴</div>
+          <div>
+            <strong>Fatigue & troubles du sommeil</strong>
+            <span>Souvent dus aux sueurs nocturnes.</span>
+          </div>
+        </div>
+        <div class="symptom-chip">
+          <div class="dot">💭</div>
+          <div>
+            <strong>Changements d'humeur</strong>
+            <span>Sensibilité plus forte, anxiété ou irritabilité.</span>
+          </div>
+        </div>
+        <div class="symptom-chip">
+          <div class="dot">🌺</div>
+          <div>
+            <strong>Inconfort intime</strong>
+            <span>Sécheresse vaginale, gêne lors des rapports ou fragilité de la vessie.</span>
+          </div>
+        </div>
+        <div class="symptom-chip">
+          <div class="dot">⚖️</div>
+          <div>
+            <strong>Prise de poids</strong>
+            <span>Changement corporel progressif.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning-box reveal">
+      <h4>Complications à surveiller</h4>
+      <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.8rem;">Même si les symptômes varient, soyez attentive à certains risques invisibles :</p>
+      <ul>
+        <li><strong>La fragilité des os (ostéoporose)</strong> — pour éviter les risques de fractures.</li>
+        <li><strong>Les maladies cardiovasculaires</strong> — surveiller la tension artérielle et le cholestérol sanguin.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MIEUX VIVRE -->
+<section id="mieuxvivre">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Mieux vivre</div>
+      <h2>Mieux vivre la ménopause</h2>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Quels réflexes adopter au quotidien ?</h3>
+      <p>Quelques changements simples dans votre mode de vie peuvent faire une grande différence.</p>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <span class="emoji">🥗</span>
+          <h4>Adapter son alimentation</h4>
+          <p>Privilégiez les aliments riches en calcium (produits laitiers, amandes, légumes verts) et en vitamine D pour protéger vos os.</p>
+        </div>
+        <div class="tip-card">
+          <span class="emoji">🚶‍♀️</span>
+          <h4>Bouger régulièrement</h4>
+          <p>La marche rapide, le yoga et la natation aident à protéger le cœur, garder des muscles solides et mieux réguler l'humeur.</p>
+        </div>
+        <div class="tip-card">
+          <span class="emoji">🧴</span>
+          <h4>Prendre soin de son confort</h4>
+          <p>Utilisez des soins hydratants plus riches pour la peau et des gels lubrifiants ou hydratants vaginaux pour la sécheresse intime.</p>
+        </div>
+        <div class="tip-card">
+          <span class="emoji">☕</span>
+          <h4>Limiter les déclencheurs</h4>
+          <p>Réduire le café, l'alcool et les plats trop épicés peut aider à diminuer l'intensité des bouffées de chaleur.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Existe-t-il des traitements pour soulager les symptômes ?</h3>
+      <p>Plusieurs options existent pour les femmes dont la qualité de vie est altérée :</p>
+      <div style="margin-top: 1.2rem;">
+        <div class="treatment-block">
+          <div class="treatment-num">1</div>
+          <div>
+            <h4>Le Traitement Hormonal de la Ménopause (THM)</h4>
+            <p>Il consiste à apporter les hormones que le corps ne fabrique plus. C'est le plus efficace contre les bouffées de chaleur et l'ostéoporose, mais il doit faire l'objet d'une discussion médicale pour évaluer les bénéfices et les risques.</p>
+          </div>
+        </div>
+        <div class="treatment-block">
+          <div class="treatment-num">2</div>
+          <div>
+            <h4>Les solutions locales</h4>
+            <p>Des crèmes ou ovules à base d'œstrogènes peuvent être prescrits pour traiter uniquement la sécheresse vaginale, sans passer dans le sang.</p>
+          </div>
+        </div>
+        <div class="treatment-block">
+          <div class="treatment-num">3</div>
+          <div>
+            <h4>Les alternatives naturelles</h4>
+            <p>Certaines plantes (comme l'actée à grappes noires) ou des techniques de relaxation peuvent soulager les formes légères, après avis d'un professionnel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-block reveal">
+      <h3>Quand faut-il consulter un médecin ?</h3>
+      <p>La ménopause n'est pas une maladie, mais un accompagnement est souvent nécessaire.</p>
+      <div class="consult-reasons">
+        <div class="consult-item">
+          <div class="icon-circle">😫</div>
+          <div>
+            <h4>Symptômes handicapants</h4>
+            <p>Si vous ne dormez plus ou si vos bouffées de chaleur gâchent votre quotidien.</p>
+          </div>
+        </div>
+        <div class="consult-item">
+          <div class="icon-circle">🩸</div>
+          <div>
+            <h4>Saignements inhabituels</h4>
+            <p>Tout saignement survenant après une année entière sans règles doit être signalé rapidement.</p>
+          </div>
+        </div>
+        <div class="consult-item">
+          <div class="icon-circle">💊</div>
+          <div>
+            <h4>Traitement personnalisé</h4>
+            <p>Pour trouver la solution la plus adaptée à votre profil et à vos besoins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonus-box reveal">
+      <p>La ménopause n'est pas une fin, c'est un nouveau chapitre. C'est souvent le moment idéal pour prendre enfin du temps pour soi, écouter son corps et adopter de nouvelles habitudes de bien-être.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VRAI OU FAUX -->
+<section id="vraifaux">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Vrai ou Faux</div>
+      <h2>On démêle le vrai du faux</h2>
+      <p>Il circule beaucoup d'idées reçues sur cette période de la vie. Faisons le point.</p>
+    </div>
+
+    <div class="myth-card reveal">
+      <div class="myth-header">
+        <div class="myth-badge">Mythe</div>
+        <h4>La ménopause commence brutalement du jour au lendemain.</h4>
+      </div>
+      <div class="myth-reality">
+        <div class="myth-check">✓</div>
+        <p><strong>C'est faux.</strong> Il existe une phase de transition appelée la périménopause, qui peut durer plusieurs années. Les cycles deviennent irréguliers avant de s'arrêter définitivement.</p>
+      </div>
+    </div>
+
+    <div class="myth-card reveal">
+      <div class="myth-header">
+        <div class="myth-badge">Mythe</div>
+        <h4>Toutes les femmes prennent obligatoirement beaucoup de poids.</h4>
+      </div>
+      <div class="myth-reality">
+        <div class="myth-check">✓</div>
+        <p><strong>Ce n'est pas une fatalité.</strong> S'il est vrai que le métabolisme change, une alimentation équilibrée et une activité physique régulière permettent de stabiliser son poids.</p>
+      </div>
+    </div>
+
+    <div class="myth-card reveal">
+      <div class="myth-header">
+        <div class="myth-badge">Mythe</div>
+        <h4>La ménopause signe la fin de la vie sexuelle et de la libido.</h4>
+      </div>
+      <div class="myth-reality">
+        <div class="myth-check">✓</div>
+        <p><strong>Pas du tout !</strong> Si la sécheresse intime peut gêner, il existe de nombreuses solutions. Beaucoup de femmes vivent une sexualité épanouie, libérée des contraintes de la contraception.</p>
+      </div>
+    </div>
+
+    <div class="myth-card reveal">
+      <div class="myth-header">
+        <div class="myth-badge">Mythe</div>
+        <h4>On ne peut rien faire contre les bouffées de chaleur.</h4>
+      </div>
+      <div class="myth-reality">
+        <div class="myth-check">✓</div>
+        <p><strong>C'est faux.</strong> Entre l'hygiène de vie, les solutions naturelles et les traitements prescrits par un médecin, il existe aujourd'hui des moyens très efficaces pour retrouver un vrai confort de vie.</p>
+      </div>
+    </div>
+
+    <div class="myth-card reveal">
+      <div class="myth-header">
+        <div class="myth-badge">Mythe</div>
+        <h4>La ménopause est une maladie qu'il faut soigner.</h4>
+      </div>
+      <div class="myth-reality">
+        <div class="myth-check">✓</div>
+        <p><strong>Absolument pas.</strong> C'est une étape physiologique naturelle de la vie, au même titre que la puberté. C'est simplement le corps qui s'adapte à un nouvel équilibre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section id="partager">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Témoignages</div>
+      <h2>Partager la ménopause</h2>
+      <p>Des femmes partagent leur vécu pour briser les tabous.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimony reveal">
+        <div class="testimony-meta">
+          <div class="testimony-avatar a">A</div>
+          <div>
+            <div class="testimony-name">Mme A</div>
+            <div class="testimony-age">58 ans</div>
+          </div>
+        </div>
+        <p>Pour moi, la ménopause a été un soulagement. On gagne un respect particulier. Je me sens plus proche de Dieu. Je passe plus de temps à la mosquée, j'étudie le Coran avec mes amies. Ce n'est pas « l'âge du désespoir », c'est l'âge de la lumière. C'est un temps pour l'âme.</p>
+      </div>
+
+      <div class="testimony reveal">
+        <div class="testimony-meta">
+          <div class="testimony-avatar b">B</div>
+          <div>
+            <div class="testimony-name">Mme B</div>
+            <div class="testimony-age">54 ans</div>
+          </div>
+        </div>
+        <p>J'ai pris ma santé en main, j'ai voyagé, j'ai investi dans ma propre sérénité. La ménopause n'a pas été ma fin, mais mon affranchissement. Je ne suis plus la « célibataire » qu'on plaint, je suis la femme qui s'appartient enfin.</p>
+      </div>
+
+      <div class="testimony reveal">
+        <div class="testimony-meta">
+          <div class="testimony-avatar c">C</div>
+          <div>
+            <div class="testimony-name">Mme C</div>
+            <div class="testimony-age">45 ans</div>
+          </div>
+        </div>
+        <p>À 42 ans, la ménopause précoce m'a plongée dans une dépression brutale. La vraie résolution est venue quand j'ai commencé la marche rapide chaque matin ; l'effort physique a stabilisé mon humeur et m'a aidée à accepter ce nouveau corps.</p>
+      </div>
+
+      <div class="testimony reveal">
+        <div class="testimony-meta">
+          <div class="testimony-avatar d">E</div>
+          <div>
+            <div class="testimony-name">Mme E</div>
+            <div class="testimony-age">51 ans</div>
+          </div>
+        </div>
+        <p>Ma sage-femme m'a dit : « Tu as passé ta vie à pleurer ce que tu n'as pas, commence à vivre ce que tu es. » Mon corps n'a pas donné la vie, mais il est vivant, et c'est ma plus belle victoire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Contact</div>
+      <h2>Contactez-nous</h2>
+    </div>
+    <div class="contact-box reveal">
+      <h3>Nous sommes à votre écoute</h3>
+      <div class="contact-links">
+        <a href="mailto:menovia77@gmail.com" class="contact-link">
+          <span class="icon">✉️</span>
+          menovia77@gmail.com
+        </a>
+        <a href="https://instagram.com/meno__via" target="_blank" class="contact-link">
+          <span class="icon">📷</span>
+          @meno__via
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 <a href="#">Menovia</a> — Créé avec soin par de futures sages-femmes.</p>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close menu on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
